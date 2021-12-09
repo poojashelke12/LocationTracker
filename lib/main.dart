@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -30,102 +30,100 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
-
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- final Completer<GoogleMapController> _controller = Completer();
- TextEditingController searchController = TextEditingController(text: "");
-   bool showSearch = false;
+  final Completer<GoogleMapController> _controller = Completer();
+  TextEditingController searchController = TextEditingController(text: "");
+  bool showSearch = false;
   final Set<Marker> listMarkers = {};
   late Marker destMark;
-  String search="";
-  
-
+  String search = "";
 
   double zoom = 18;
-  
-  CameraPosition currentLocation =  const CameraPosition(target: LatLng(19.177090, 72.843239), zoom: 18);
+
+  CameraPosition currentLocation =
+      const CameraPosition(target: LatLng(19.177090, 72.843239), zoom: 18);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: showSearch == false?
-        Container(
-           padding: const EdgeInsets.only(
-                          left: 18, right: 18, top: 8, bottom: 8),
-                      width: MediaQuery.of(context).size.width * 1,
-                     height: MediaQuery.of(context).size.height * 0.07,
-          child: TypeAheadField(
-  textFieldConfiguration: const TextFieldConfiguration(
-    autofocus: true,
-    style:    TextStyle(fontSize: 18.0, color: Color.fromARGB(255, 8, 8, 8)),
-    decoration: InputDecoration(
-      prefixIcon:  Icon(Icons.search),
-     filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Search Here',
-                          contentPadding:  EdgeInsets.only(
-                              left: 14.0, bottom: 8.0, top: 1.0),
-                              hintStyle:  TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: 'Bahnschrift',
-                                                    color: Color(0xffB4B4B4)),
-                                                    focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.zero)
-    )
-  ),
-  suggestionsCallback: (pattern) async {
-    return listMarkers.where((e) {return e.infoWindow.title!.toLowerCase().contains(search.toLowerCase());});
-  },
-  itemBuilder: (context, suggestion) {
-    dynamic temp=suggestion;
-    return ListTile(
-     
-      title: Text(temp.infoWindow.title.toString()),
-      subtitle: Text(temp.infoWindow.snippet.toString()),
-    );
-  },
-  onSuggestionSelected: (Marker suggestion) {
-setState(() {
-    currentLocation =   CameraPosition(target: suggestion.position, zoom: 18);
-
-});    
-    
-  },
-),
-        ):Container()
-
-      ),
+          title: showSearch == false
+              ? Container(
+                  padding: const EdgeInsets.only(
+                      left: 18, right: 18, top: 8, bottom: 8),
+                  width: MediaQuery.of(context).size.width * 1,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  child: TypeAheadField(
+                    textFieldConfiguration: const TextFieldConfiguration(
+                        autofocus: true,
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            color: Color.fromARGB(255, 8, 8, 8)),
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.search),
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'Search Here',
+                            contentPadding: EdgeInsets.only(
+                                left: 14.0, bottom: 8.0, top: 1.0),
+                            hintStyle: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Bahnschrift',
+                                color: Color(0xffB4B4B4)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.zero))),
+                    suggestionsCallback: (pattern) async {
+                      return listMarkers.where((e) {
+                        return e.infoWindow.title!
+                            .toLowerCase()
+                            .contains(search.toLowerCase());
+                      });
+                    },
+                    itemBuilder: (context, suggestion) {
+                      dynamic temp = suggestion;
+                      return ListTile(
+                        title: Text(temp.infoWindow.title.toString()),
+                        subtitle: Text(temp.infoWindow.snippet.toString()),
+                      );
+                    },
+                    onSuggestionSelected: (Marker suggestion) {
+                      setState(() {
+                        currentLocation = CameraPosition(
+                            target: suggestion.position, zoom: 18);
+                      });
+                    },
+                  ),
+                )
+              : Container()),
       body: GoogleMap(
         compassEnabled: true,
         zoomControlsEnabled: false,
         mapType: MapType.normal,
         initialCameraPosition: currentLocation,
         onMapCreated: (GoogleMapController controller) {
-           _controller.complete(controller);
-         
+          _controller.complete(controller);
         },
-        onTap: (click){
+        onTap: (click) {
           print(click);
-           destMark = Marker(
-              markerId: const MarkerId('current'),
-              icon: BitmapDescriptor.defaultMarkerWithHue(195),
-              infoWindow: const InfoWindow(title: "Last", snippet: "destination"),
-              position: click,
-            );
-            print(listMarkers);
-            setState(() {
-              if(listMarkers.contains(destMark)){
-                   listMarkers.remove(destMark);
-              }
+          destMark = Marker(
+            markerId: const MarkerId('current'),
+            icon: BitmapDescriptor.defaultMarkerWithHue(195),
+            infoWindow: const InfoWindow(title: "Last", snippet: "destination"),
+            position: click,
+          );
+          print(listMarkers);
+          setState(() {
+            if (listMarkers.contains(destMark)) {
+              listMarkers.remove(destMark);
+            }
 
-                 listMarkers.add(destMark);
-            });
+            listMarkers.add(destMark);
+          });
         },
         onCameraMove: (position) {
           setState(() {
@@ -133,18 +131,21 @@ setState(() {
           });
         },
         markers: Set<Marker>.of(listMarkers),
-      
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) =>  FirstPage(current: listMarkers, deskMark: destMark,))).then((value) {
-                print(listMarkers);
-                setState(() {
-                   listMarkers.remove(destMark);
-                });
-               
-              });
+              context,
+              MaterialPageRoute(
+                  builder: (context) => FirstPage(
+                        current: listMarkers,
+                        deskMark: destMark,
+                      ))).then((value) {
+            print(listMarkers);
+            setState(() {
+              listMarkers.remove(destMark);
+            });
+          });
         },
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

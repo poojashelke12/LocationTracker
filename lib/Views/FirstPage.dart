@@ -3,11 +3,11 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/config.dart';
 
-
 class FirstPage extends StatefulWidget {
   final dynamic current;
-  final dynamic  deskMark;
-  const FirstPage({Key? key, required this.current,this.deskMark}) : super(key: key) ;
+  final dynamic deskMark;
+  const FirstPage({Key? key, required this.current, this.deskMark})
+      : super(key: key);
 
   @override
   _FirstPageState createState() => _FirstPageState();
@@ -18,7 +18,7 @@ class _FirstPageState extends State<FirstPage> {
   TextEditingController labelCOntroller = TextEditingController();
   bool validate = false;
   Color pickerColor = const Color(0xff443a49);
-  late Color currentColor =Colors.red;
+  late Color currentColor = Colors.red;
 
   void changeColor(Color color) {
     setState(() => pickerColor = color);
@@ -32,7 +32,6 @@ class _FirstPageState extends State<FirstPage> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +39,11 @@ class _FirstPageState extends State<FirstPage> {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            IconButton(icon: const Icon(Icons.arrow_back_ios), onPressed: () {
-                Navigator.pop(context);
-            }),
+            IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
             Container(
               color: Colors.white,
               width: 1.3,
@@ -60,7 +61,6 @@ class _FirstPageState extends State<FirstPage> {
             ),
           ],
         ),
-       
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
@@ -80,7 +80,7 @@ class _FirstPageState extends State<FirstPage> {
                             padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.12,
                         )),
-                       
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -101,7 +101,8 @@ class _FirstPageState extends State<FirstPage> {
                                             fontSize: 19,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Bahnschrift',
-                                            color: Color.fromARGB(255, 15, 11, 11)),
+                                            color: Color.fromARGB(
+                                                255, 15, 11, 11)),
                                         keyboardType: TextInputType.text,
                                         decoration: const InputDecoration(
                                           border: InputBorder.none,
@@ -115,7 +116,8 @@ class _FirstPageState extends State<FirstPage> {
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
                                               fontFamily: 'Bahnschrift',
-                                              color: Color.fromARGB(255, 15, 11, 11)),
+                                              color: Color.fromARGB(
+                                                  255, 15, 11, 11)),
                                         )),
                                   ),
                                 ],
@@ -123,25 +125,25 @@ class _FirstPageState extends State<FirstPage> {
                             )),
                           ],
                         ),
-                         titleCOntroller.text.isEmpty && validate
-                                  ? Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Container(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: const Text(
-                                          "Title cannot be blank.",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
-                              // Padding(
-                              //     padding: EdgeInsets.only(
-                              //   top: MediaQuery.of(context).size.height * 0.02,
-                              // )),
+                        titleCOntroller.text.isEmpty && validate
+                            ? Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: const Text(
+                                    "Title cannot be blank.",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        // Padding(
+                        //     padding: EdgeInsets.only(
+                        //   top: MediaQuery.of(context).size.height * 0.02,
+                        // )),
                         Padding(
                             padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.03,
@@ -166,7 +168,8 @@ class _FirstPageState extends State<FirstPage> {
                                             fontSize: 19,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Bahnschrift',
-                                            color: Color.fromARGB(255, 15, 11, 11)),
+                                            color: Color.fromARGB(
+                                                255, 15, 11, 11)),
                                         keyboardType: TextInputType.text,
                                         decoration: const InputDecoration(
                                           border: InputBorder.none,
@@ -180,7 +183,8 @@ class _FirstPageState extends State<FirstPage> {
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
                                               fontFamily: 'Bahnschrift',
-                                              color: Color.fromARGB(255, 15, 11, 11)),
+                                              color: Color.fromARGB(
+                                                  255, 15, 11, 11)),
                                         )),
                                   ),
                                 ],
@@ -188,31 +192,30 @@ class _FirstPageState extends State<FirstPage> {
                             )),
                           ],
                         ),
-                         labelCOntroller.text.isEmpty && validate
-                                  ? Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Container(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: const Text(
-                                          "Label cannot be blank.",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
-                              // Padding(
-                              //     padding: EdgeInsets.only(
-                              //   top: MediaQuery.of(context).size.height * 0.02,
-                              // )),
-                         Padding(
+                        labelCOntroller.text.isEmpty && validate
+                            ? Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: const Text(
+                                    "Label cannot be blank.",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        // Padding(
+                        //     padding: EdgeInsets.only(
+                        //   top: MediaQuery.of(context).size.height * 0.02,
+                        // )),
+                        Padding(
                             padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.03,
                         )),
 
-                        
                         Row(
                           children: [
                             Expanded(
@@ -242,13 +245,8 @@ class _FirstPageState extends State<FirstPage> {
                                         );
                                       });
                                 },
-                                
-                                
                                 child: Center(
-                                  
-                                  
                                   child: Container(
-                                    
                                     height: 25,
                                     width: 150,
                                     decoration: BoxDecoration(
@@ -298,22 +296,30 @@ class _FirstPageState extends State<FirstPage> {
                               child: TextButton(
                                 onPressed: () {
                                   if (titleCOntroller.text.isNotEmpty &&
-                                      labelCOntroller.text.isNotEmpty ) {
-                                        String ltlng = (widget.deskMark.position.latitude.toString()+widget.deskMark.position.longitude.toString());
-                                         Marker newMarker= Marker(
-                                                  markerId:  MarkerId('current'+ltlng),
-                                                  icon: BitmapDescriptor.defaultMarkerWithHue(HSVColor.fromColor(pickerColor).hue),
-                                                  infoWindow:  InfoWindow(title: titleCOntroller.text, snippet: labelCOntroller.text),
-                                                  position: widget.deskMark.position,
-                                                  // position: LatLng(19.178895, 72.843181),
-                                                );
+                                      labelCOntroller.text.isNotEmpty) {
+                                    String ltlng = (widget
+                                            .deskMark.position.latitude
+                                            .toString() +
+                                        widget.deskMark.position.longitude
+                                            .toString());
+                                    Marker newMarker = Marker(
+                                      markerId: MarkerId('current' + ltlng),
+                                      icon:
+                                          BitmapDescriptor.defaultMarkerWithHue(
+                                              HSVColor.fromColor(pickerColor)
+                                                  .hue),
+                                      infoWindow: InfoWindow(
+                                          title: titleCOntroller.text,
+                                          snippet: labelCOntroller.text),
+                                      position: widget.deskMark.position,
+                                      // position: LatLng(19.178895, 72.843181),
+                                    );
                                     setState(() {
                                       widget.current.add(newMarker);
                                       validate = false;
                                     });
-                                     Navigator.pop(context);
+                                    Navigator.pop(context);
                                   } else {
-                                     
                                     setState(() {
                                       validate = true;
                                     });
